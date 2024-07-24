@@ -29,8 +29,6 @@ jobs:
       working-directory: ./backend
   
     - name: Build App
-      run: |
-       bash ./prestart.sh
-       uvicorn app.main:app --reload
+      run: build-backend
       working-directory: ./backend
     
