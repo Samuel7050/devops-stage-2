@@ -13,22 +13,22 @@ jobs:
 
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v2
-
-    - name: setup pyton
-      uses: actions/setup-python@v2
-      with: 
-       python-version: 3.8
-
-    - name: setup poetry 
-      uses: SG60/setup-poetry@v1
+      uses: actions/checkout@v1
       
-
-    - name: install dependencies
-      run: poetry install 
-      working-directory: ./backend
+    - name: setup python and poetry 
+      uses: actions/setup-python@v1
+    - run: |
+        pip install -U pip
+        pip install poetry
+        poetry install
+      env:
+        POETRY_VIRTUALENVS_CREATE: false
   
     - name: Build App
-      run: build-backend
+      run: |
+       bash ./prestart.sh
+       uvicorn app.main:app --reload
       working-directory: ./backend
+    
+
     
