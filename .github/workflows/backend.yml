@@ -10,7 +10,15 @@ jobs:
  Backend:
 
     runs-on: ubuntu-latest
-
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: changethis123
+          POSTGRES_DB: app
     steps:
     - name: Checkout repo
       uses: actions/checkout@v1
